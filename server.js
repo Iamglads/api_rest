@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 const { MONGO_URI} = require('./config');
 const log = console.log;
 
+// routes 
+const postRoute = require('./routes/api/post');
+
 const app = express();
+
+//bodyParser middleware 
+
+app.use(express.json());
 
 // Connect to mongoDB
 mongoose.connect(MONGO_URI, {
@@ -14,9 +21,8 @@ mongoose.connect(MONGO_URI, {
 .catch(() => log('Connexion échouée !'));
 
 
-app.get('/', (req, res) => {
-    res.send('Hello worl')
-})
+app.use('/api/post',postRoute);
+app.use('/api/post', postRoute);
 
 const PORT = process.env.PORT || 5000;
 
